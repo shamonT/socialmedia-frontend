@@ -31,7 +31,7 @@ const ConversationWidget = ({ data, currentUserId, online }) => {
           {online && <div className="online-dot"></div>}
          
           <img
-            src={`http://localhost:3001/assets/${
+            src={`https://socialpedia.fashionnova.store/assets/${
               userData ? userData.picturePath : console.log("nothinggg")
             }`}
             alt="user"

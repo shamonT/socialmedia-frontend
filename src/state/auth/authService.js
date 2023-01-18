@@ -9,7 +9,7 @@ import axios from "axios";
 const register = async (userData) => {
     console.log('call reached register',userData)
     const response = await axios.post(
-      "http://localhost:3001/admin/adminregister",
+      "https://socialpedia.fashionnova.store/admin/adminregister",
       userData
     );
     console.log(response,'responseeee')
@@ -24,7 +24,7 @@ const register = async (userData) => {
   
     console.log(userData, "haiiiiiiiiiiiiiiiiiiiiiii");
     const response = await axios.post(
-      "http://localhost:3001/admin/admin",
+      "https://socialpedia.fashionnova.store/admin/admin",
       userData
     );
       console.log(response,

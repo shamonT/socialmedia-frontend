@@ -70,13 +70,7 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
     console.log(formData, "detailssssss");
-    //   const savedUserResponse = await fetch(
-    //     "http://localhost:3001/auth/register",
-    //     {
-    //       method: "POST",
-    //       body: formData,
-    //     }
-    //   );
+    // 
     //   const savedUser = await savedUserResponse.json();
     //   onSubmitProps.resetForm();
 
@@ -109,11 +103,7 @@ const Form = () => {
     const loggedInResponse=await userLogin(values,{
       headers: { "Content-Type": "application/json" },
     })
-    // const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(values),
-    // });
+   
     console.log(loggedInResponse,'loggedInResponse');
     const loggedIn = await loggedInResponse.data
     console.log(loggedIn.token,'loggedInloggedIn')
