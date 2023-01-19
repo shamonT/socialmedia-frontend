@@ -120,7 +120,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 <div className="follower conversation">
                   <div>
                     <img
-                      src={`https://socialpedia.fashionnova.store/assets/${
+                      src={`${process.env.REACT_APP_BASE_URL}/assets/${
                         userData
                           ? userData.picturePath
                           : console.log("nothinggg")

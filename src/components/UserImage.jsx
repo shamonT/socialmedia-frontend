@@ -9,7 +9,7 @@ const userImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`https://socialpedia.fashionnova.store/assets/${image}`}
+        src={`${process.env.REACT_APP_BASE_URL}/assets/${image}`}
       />
     </Box>
   );

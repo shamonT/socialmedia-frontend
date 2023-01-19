@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "https://socialpedia.fashionnova.store/" });
+const API = axios.create({ baseURL: process.env.REACT_APP_API_AUTH });
 
 
 export const sendOtp=(email)=>API.post("/send-otp",{email})

@@ -98,7 +98,7 @@ const PostWidget = ({
   const handleRemove = async (commentId) => {
     
     const response = await fetch(
-      `https://socialpedia.fashionnova.store/posts/comment/${postId}/${commentId}`,
+      `${process.env.REACT_APP_BASE_URL}/posts/comment/${postId}/${commentId}`,
       {
         method: "delete",
         headers: {
@@ -203,7 +203,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`https://socialpedia.fashionnova.store/assets/${picturePath}`}
+          src={`${process.env.REACT_APP_BASE_URL}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">
