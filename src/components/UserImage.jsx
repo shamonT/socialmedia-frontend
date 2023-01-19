@@ -9,7 +9,7 @@ const userImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`${process.env.REACT_APP_API_AUTH}/assets/${image}`}
+        src={`https://socialpedia.fashionnova.store/assets/${image}`}
       />
     </Box>
   );
