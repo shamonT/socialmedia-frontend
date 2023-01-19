@@ -120,7 +120,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 <div className="follower conversation">
                   <div>
                     <img
-                      src={`${process.env.REACT_APP_API_AUTH}/assets/${
+                      src={`/assets/${
                         userData
                           ? userData.picturePath
                           : console.log("nothinggg")
