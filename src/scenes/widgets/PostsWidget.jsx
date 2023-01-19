@@ -15,7 +15,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const getPosts = async () => {
     
     const response = await feedPosts({ headers: { Authorization: `Bearer ${token}` }})
-   
+   console.log(response,'repsnsepost');
     if(response.data){
       console.log('its workingggggggggggggg');
       const data = response.data

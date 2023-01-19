@@ -120,7 +120,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 <div className="follower conversation">
                   <div>
                     <img
-                      src={`${process.env.REACT_APP_BASE_URL}/assets/${
+                      src={`${process.env.REACT_APP_API_AUTH}/assets/${
                         userData
                           ? userData.picturePath
                           : console.log("nothinggg")
@@ -159,6 +159,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                         : "message"
                     }
                   >
+
                     <span>{message.text}</span>
                     <span>{format(message.createdAt)}</span>
                   </div>

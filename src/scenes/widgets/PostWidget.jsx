@@ -71,6 +71,7 @@ const PostWidget = ({
   // };
 
   const handleDelete = async () => {
+   
     const response= await deletePost(postId,{
       headers: {
         Authorization: `Bearer ${token}`,
@@ -126,6 +127,7 @@ const PostWidget = ({
   
     
   const patchLike = async () => {
+    
     const response = await LikePost(postId, loggedInUserId, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -203,7 +205,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`${process.env.REACT_APP_BASE_URL}/assets/${picturePath}`}
+          src={`${process.env.REACT_APP_API_AUTH}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">

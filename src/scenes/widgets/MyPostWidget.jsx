@@ -51,22 +51,19 @@ const MyPostWidget = ({ picturePath }) => {
     }
 console.log(token,"bbbbbb");
 const response = await PostData(formData, { headers: { Authorization: `Bearer ${token}` }, })
-    if(response.status === 200){
-      console.log(response,'kkljfwa');
-      const posts = await response.json();
-      if(posts.stack){
-        toast.error(posts.message)
-        return;
-      }
-      console.log(posts,'posts');
-      dispatch(setPosts({ posts }));
-      setImage(null);
-      setPost("");
-    }else{
-      console.log(response,'kkljfwa');
-      toast.error(response.data.message)
-    }
-  };
+console.log(response.data, 'user post chytha dataa');
+
+if (response.data) {
+    const posts = response.data
+    dispatch(setPosts({ posts }));
+    setImage(null);
+    setPost("");
+    
+
+}
+
+
+}
 
   return (
     <WidgetWrapper>
