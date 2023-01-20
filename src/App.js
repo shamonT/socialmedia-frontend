@@ -26,6 +26,7 @@ import ResetPass from "scenes/setPassword/ResetPass";
 import ForgotPassword from "components/ForgotPassword";
 import PasswordReset from "components/PasswordReset";
 import Otp from "components/Otp";
+import AdminProtectedRoute from "components/protectedRoute";
 //import { StarRateRounded } from "@mui/icons-material";
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector((state) => state.auth.token));
+  const iisAuth = Boolean(useSelector((state) => state.adminAuth.admin));
+  console.log(iisAuth,'bhbhbhbhbbb');
   return (
     <div className="App">
       
@@ -54,11 +57,23 @@ function App() {
               path="/profile/:userId"
               element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
             />
-               <Route path='/admin/dashboard' element={<Dashboard/>}/>
+               {/* <Route path='/admin/dashboard' element={<Dashboard/>}/> */}
                {/* <Route path='/register' element={<Register/>}/> */}
                <Route path='/admin' element={<Admin/>}/>
-               <Route path='/admin/user-list' element={<Userlists/>}/>   
-               <Route path='/admin/report-list' element={<UserreporterList/>}/>   
+               <Route
+              path="/admin/dashboard"
+              element={iisAuth ? <Dashboard /> : <Navigate to="/admin" />}
+            />
+            <Route
+              path="/admin/user-list"
+              element={iisAuth ? <Userlists/> : <Navigate to="/admin" />}
+            />
+               {/* <Route path='/admin/user-list' element={<Userlists/>}/>    */}
+               <Route
+              path="/admin/report-list"
+              element={iisAuth ? <UserreporterList/>: <Navigate to="/admin" />}
+            />
+               {/* <Route path='/admin/report-list' element={<UserreporterList/>}/>    */}
                <Route
               path="/chat"
               element={isAuth ? <Chat/> : <Navigate to="/" />}
