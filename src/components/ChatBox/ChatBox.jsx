@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./ChatBox.css";
 import { format } from "timeago.js"; 
 
-import InputEmoji from "react-input-emoji";
+// import InputEmoji from "react-input-emoji";
 import axios from "axios";
 import { addMessage, getMessages, getUserProfile } from "api/AuthRequest";
 
@@ -120,7 +120,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 <div className="follower conversation">
                   <div>
                     <img
-                      src={`/assets/${
+                      src={`https://socialpedia.fashionnova.store/assets/${
                         userData
                           ? userData.picturePath
                           : console.log("nothinggg")
@@ -180,7 +180,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
               <div className="send-button button" onClick={handleSend}>
                 Send
               </div>
-              <InputEmoji value={newMessage} onChange={handleChange} />
+              {/* <InputEmoji value={newMessage} onChange={handleChange} /> */}
             </div>
           </>
         ) : (
