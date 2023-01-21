@@ -21,6 +21,7 @@ import TextsmsIcon from '@mui/icons-material/Textsms';
 import { createUserChat, editProfile, editProflePic, getUserProfile } from "api/AuthRequest";
 import Dropzone from "react-dropzone";
 import EditProfile from "components/EditProfile";
+import { toast } from "react-toastify";
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
   const { palette } = useTheme();
@@ -101,6 +102,8 @@ const UserWidget = ({ userId, picturePath }) => {
       }, 3000);
 
 
+    }else{
+      toast.error("image format  not supported/reduce resolution");
     }
 
 

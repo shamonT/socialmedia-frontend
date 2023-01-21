@@ -62,7 +62,7 @@ const Reporterlist = () => {
                        
                         <th>PostId</th>
                         <th>ReportCount</th>
-                       <th>reportreaso</th>
+                       <th>reportreason</th>
                         
                         <th>Action</th>
                     </tr>

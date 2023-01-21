@@ -4,7 +4,7 @@ import {
   FavoriteOutlined,
   MoreVertOutlined,
 } from "@mui/icons-material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Button,
@@ -27,6 +27,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import EditPost from "scenes/PostDelete/EditPost";
+
 import { setPost } from "state";
 import { format } from "timeago.js";
 // import { MoreVertOutlinedIcon } from "@mui/icons-material";
@@ -42,10 +44,12 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
+  const [opened, setOpened] = useState(false);
   const navigate = useNavigate();
   const [isComments, setIsComments] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const [comment, setComment] = useState("");
+  const [editPost, setEditPost] = useState(false);
   const [time, setTime] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -57,6 +61,9 @@ const PostWidget = ({
   const [show, setShow] = useState(false);
   const [remove, setRemove] = useState(false);
   const [reportModal, setReportModal] = useState(false);
+  const handleOpened = () => setOpened(true);
+  const handleClosed = () => setOpened(false);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -71,13 +78,12 @@ const PostWidget = ({
   // };
 
   const handleDelete = async () => {
-   
-    const response= await deletePost(postId,{
+    const response = await deletePost(postId, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-    })
+    });
     // const response = await fetch(
     //   `http://localhost:3001/posts/delete-post/${postId}`,
     //   {
@@ -95,9 +101,8 @@ const PostWidget = ({
     }
     // console.log(response,'responseresponse');
   };
-  
+
   const handleRemove = async (commentId) => {
-    
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}/posts/comment/${postId}/${commentId}`,
       {
@@ -109,25 +114,20 @@ const PostWidget = ({
       }
     );
     if (response) {
-      toast.success('comment removed')
+      toast.success("comment removed");
 
-      setComment(
-          comments.filter((value) => value.commentId !== commentId)
-
-      )
-  }
+      setComment(comments.filter((value) => value.commentId !== commentId));
+    }
     // console.log(response,'responseresponse');
   };
   useEffect(() => {}, []);
-     
+
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
   let newComment = comments;
-  
-    
+
   const patchLike = async () => {
-    
     const response = await LikePost(postId, loggedInUserId, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -175,11 +175,12 @@ const PostWidget = ({
   //     dispatch(setPost({ post: response.data.newCommentPost }));
   //   }
   // };
+
   const patchComment = async () => {
     const userName = user.firstName + " " + user.lastName;
     let response;
     if (comment) {
-      response = await CommentPost(comment, userName, postId, time)
+      response = await CommentPost(comment, userName, postId, time);
     } else {
       toast.error("No comment found.");
     }
@@ -270,7 +271,10 @@ const PostWidget = ({
           }}
         >
           {postUserId === loggedInUserId ? (
-            <MenuItem onClick={handleDelete}>Delete</MenuItem>
+            <div>
+              <MenuItem onClick={handleDelete}>Delete</MenuItem>
+              <MenuItem onClick={handleOpened}>Edit Post</MenuItem>
+            </div>
           ) : (
             <>
               <MenuItem onClick={handleReport}>Report</MenuItem>
@@ -294,10 +298,8 @@ const PostWidget = ({
                 <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
                   {comment.username}: {comment.comment}:
                   <span>{format(comment.time)}</span>{" "}
-                  <Button
-                  onClick={handleRemove}
-                  >
-               <DeleteIcon/>
+                  <Button onClick={handleRemove}>
+                    <DeleteIcon />
                   </Button>
                 </Typography>
                 <Typography
@@ -309,6 +311,12 @@ const PostWidget = ({
           <Divider />
         </Box>
       )}
+      <EditPost opened={opened}
+        handleClosed={handleClosed}
+        postId={postId}
+        description={description}
+        picturePath={picturePath}
+        handleClose={handleClose}/> 
     </WidgetWrapper>
   );
 };

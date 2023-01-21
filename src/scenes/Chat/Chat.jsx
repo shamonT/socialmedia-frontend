@@ -28,7 +28,7 @@ const Chat = () => {
   }, [sendMessage]);
 
   useEffect(() => {
-    socket.current = io(`ws://${process.env.REACT_APP_BASE_URL}`);
+    socket.current = io(`ws://${process.env.REACT_APP_API_AUTH}`);
     socket.current.emit("new-user-add", user._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);

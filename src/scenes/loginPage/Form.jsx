@@ -17,6 +17,7 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 import OtpFormm from "./OtpFormm";
 import { sendOtp, userLogin } from "api/AuthRequest";
+import { toast } from "react-toastify";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -93,6 +94,7 @@ const Form = () => {
         setOtpField(true);
         setOtp(response.data.response.otp);
       } else {
+        toast.error("enter valid data or otp");
         console.log("erororrr");
       }
     }
@@ -116,6 +118,8 @@ const Form = () => {
         })
       );
       navigate("/home");
+    }else{
+      toast.error("account  not found");
     }
   };
 

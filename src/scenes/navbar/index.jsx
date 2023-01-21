@@ -15,12 +15,13 @@ import {
 import {
   Search,
   Message,
-  DarkMode,
-  LightMode,
+ 
   Notifications,
   Help,
   Menu,
   Close,
+  DarkMode,
+  LightMode,
 } from "@mui/icons-material";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -130,7 +131,7 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (

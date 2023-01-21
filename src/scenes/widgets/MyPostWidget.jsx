@@ -60,6 +60,8 @@ if (response.data) {
     setPost("");
     
 
+}else{
+  toast.error("oops! didnt support the format");
 }
 
 

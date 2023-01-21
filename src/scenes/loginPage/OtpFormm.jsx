@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button, Alert } from "antd";
 import axios from "axios";
 import { userRegister } from "api/AuthRequest";
+import { toast } from "react-toastify";
 
 const OtpFormm = ({
   userDetails,
@@ -21,7 +22,7 @@ const OtpFormm = ({
          
         }
       } else {
-        console.log("otp incorrect");
+        toast.error("Incorrect otp");
       }
     } catch (error) {
       console.log(error);

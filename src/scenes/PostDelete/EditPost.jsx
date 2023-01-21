@@ -9,13 +9,16 @@ import {
     Typography,
     useTheme,
   } from "@mui/material";
-  import React, { useState } from "react";
+  import React, { useEffect, useState } from "react";
   import { useDispatch } from "react-redux";
   
   import { editDescription } from "api/AuthRequest";
   import FlexBetween from "components/FlexBetween";
   import WidgetWrapper from "components/WidgetWrapper";
   import { setPost,setPosts } from "state";
+import { toast } from "react-toastify";
+import { Navigate, useNavigate } from "react-router-dom";
+import { reset } from "state/auth/adminIndex";
   
   const EditPost = ({
     opened,
@@ -29,7 +32,7 @@ import {
     const [loader, setLoader] = useState(false);
     const { palette } = useTheme();
     const dispatch = useDispatch();
-  
+    const navigate=useNavigate()
     //Modal style
     const style = {
       position: "absolute",
@@ -53,12 +56,17 @@ import {
           handleClosed();
           handleClose();
           dispatch(setPost({ post: updatedPosts }));
+          navigate('/')
+         
           setLoader(false);
+        }else{
+          toast.error("soorry .");
         }
       } catch (error) {
         console.log(error);
       }
     };
+  
     return (
       <div>
         <Modal

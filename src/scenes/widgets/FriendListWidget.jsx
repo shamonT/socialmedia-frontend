@@ -4,6 +4,7 @@ import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import { setFriends } from "state";
 
 const FriendListWidget = ({ userId }) => {
@@ -14,11 +15,16 @@ const FriendListWidget = ({ userId }) => {
   // friends = [friends]
 
   const getFriends = async () => {
+
     const response = await getFriendList(userId, { headers: { Authorization: `Bearer ${token}` }, });
-   
-    const data = await response.json();
-    dispatch(setFriends({ friends: data }));
-  };
+    console.log(response.data, 'friendList');
+    if (response.data) {
+
+        dispatch(setFriends({ friends: response.data }));
+    }else{
+      toast.error("  not found");
+    }
+};
 
   useEffect(() => {
     getFriends();
