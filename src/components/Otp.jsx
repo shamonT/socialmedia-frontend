@@ -21,7 +21,7 @@ const Otp = () => {
 
   return (
     <>
-      <section>
+      <div className="container">
         <div className="form_data">
           <div className="form_heading">
             <h1>Enter The Otp</h1>
@@ -43,7 +43,7 @@ const Otp = () => {
           </Form>
           <ToastContainer />
         </div>
-      </section>
+        </div>
     </>
   );
 };

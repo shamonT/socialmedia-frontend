@@ -309,7 +309,7 @@ body,
  
 } */
 .form_data{
-  padding-left: 28rem;
+  padding-left: rem;
     padding-top: 11rem;
 }
 .otp{
@@ -318,4 +318,7 @@ body,
 }
 .forgot{
   padding-top: 18rem;
+}
+.row{
+  background-color: lightblue;
 }

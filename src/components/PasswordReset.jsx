@@ -38,7 +38,7 @@ const PasswordReset = () => {
 
   return (
     <>
-      <section>
+      <div className="container">
         <div className="form_data">
           <div className="form_heading">
             <h1>Enter Your Email</h1>
@@ -64,7 +64,7 @@ const PasswordReset = () => {
               />
             </div>
 
-            <button className="btn" onClick={sendLink}>
+            <button className="row " onClick={sendLink}>
               Send
             </button>
           </form>
@@ -72,7 +72,7 @@ const PasswordReset = () => {
 
           {/* <ForgotPassword email={email}/>  */}
         </div>
-      </section>
+        </div>
     </>
   );
 };

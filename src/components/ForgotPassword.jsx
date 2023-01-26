@@ -26,6 +26,7 @@ const ForgotPassword =
   };
 
   return (
+    <div className="container">
     <div className='forgot'>
     <Form
       name="basic"
@@ -55,6 +56,7 @@ const ForgotPassword =
         </Button>
       </Form.Item>
     </Form>
+    </div>
     </div>
   );
 };
