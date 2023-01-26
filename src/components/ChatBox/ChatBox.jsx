@@ -16,6 +16,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
   
 
   const handleChange = (e) => {
+    
     setNewMessage(e.target.value);
   };
 
@@ -66,6 +67,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
 
   const handleSend = async (e) => {
     e.preventDefault();
+    
     const message = {
       senderId: currentUser,
       text: newMessage,
@@ -73,22 +75,27 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
     };
     console.log(message, "measage");
     //Send message to database
-    try {
-      const { data } = await addMessage(message, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (data) {
-        console.log(data, "new chat111111111111");
+    if(message.text!==""){
 
-        setMessages([...messages, data]);
-        console.log(messages, "kitiianam");
-        setNewMessage("");
-      } else {
-        console.log("no data");
+      try {
+     
+        const { data } = await addMessage(message, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (data) {
+          console.log(data, "new chat111111111111");
+  
+          setMessages([...messages, data]);
+          console.log(messages, "kitiianam");
+          setNewMessage("");
+        } else {
+          console.log("no data");
+        }
+      } catch (error) {
+        console.log(error, "error ividee");
       }
-    } catch (error) {
-      console.log(error, "error ividee");
     }
+   
 
     //Send Message to socket server
     const receiverId = chat.members.find((id) => id !== currentUser);
@@ -168,7 +175,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
             </div>
             {/* Chat Sender */}
             <div className="chat-sender">
-              <div>+</div>
+              {/* <div>+</div> */}
 
               <input
                 type="text"
@@ -176,6 +183,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 placeholder="Message"
                 value={newMessage}
                 onChange={handleChange}
+             
               />
               <div className="send-button button" onClick={handleSend}>
                 Send
@@ -185,7 +193,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
           </>
         ) : (
           <span className="chatbox-empty-message">
-            Tap on chat to start convesation...
+            Tap on chat to start conversation...
           </span>
         )}
       </div>

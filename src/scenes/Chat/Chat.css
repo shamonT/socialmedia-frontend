@@ -1,7 +1,7 @@
 .Chat {
   position: relative;
   display: grid;
-  grid-template-columns: 22% auto;
+  grid-template-columns: 22% 78%;
   gap: 1rem;
 }
 
@@ -30,8 +30,9 @@
 }
 
 .Right-side-chat {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 100%;
+  margin-top: 3rem;
   gap: 1rem;
 }
 .conversation:hover {

@@ -93,6 +93,7 @@ const Chat = () => {
               
             </div>
             {/* Chat Body */}
+            
             <ChatBox
               chat={currentChat}
               currentUser={user._id}
