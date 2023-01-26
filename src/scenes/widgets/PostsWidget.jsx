@@ -98,7 +98,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         )
       )}
     </>
-    : 'null'
+    : 'add new post'
     }
     
     </>

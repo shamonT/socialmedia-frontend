@@ -53,7 +53,7 @@ const FriendListWidget = ({ userId }) => {
           />
         ))}
         </>
-        :"null"
+        :"Add friends"
         }
        
       </Box>
