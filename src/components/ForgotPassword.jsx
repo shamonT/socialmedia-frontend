@@ -17,7 +17,7 @@ const ForgotPassword =
    const response= await resetPassword(values.password,email)
    console.log(response,'jnjnhbh,');
    if(response.status===201){
-    navigate('/home')
+    navigate('/')
    }
   };
 

@@ -4,7 +4,7 @@
     display: grid;
     grid-template-rows: 14vh 60vh 12vh;
     margin-top: 2rem;
-   grid-template-columns: 220%;
+    grid-template-columns: 220%;
     width:100%;
   }
   
