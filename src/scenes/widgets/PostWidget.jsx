@@ -298,9 +298,9 @@ const PostWidget = ({
                 <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
                   {comment.username}: {comment.comment}:
                   <span>{format(comment.time)}</span>{" "}
-                  <Button onClick={handleRemove}>
+                  {/* <Button onClick={handleRemove}>
                     <DeleteIcon />
-                  </Button>
+                  </Button> */}
                 </Typography>
                 <Typography
                   sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}

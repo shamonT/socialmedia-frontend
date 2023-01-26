@@ -43,7 +43,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={isAuth===false?<LoginPage />:<HomePage />} />
             <Route path="/otp-page" element={<OtpFormm />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/password-reset" element={<PasswordReset />} />
