@@ -5,14 +5,14 @@ import { Button, Form, Input } from "antd";
 
 const Otp = () => {
   const location = useLocation();
-  const navigate=useNavigate()
-  console.log(location.state.data,' email:data.response.envelope.to[0]');
+  const navigate = useNavigate();
+  console.log(location.state.data, " email:data.response.envelope.to[0]");
   const data = location.state.data;
   const onFinish = (value) => {
     console.log(data, "dsadassadas", value);
     try {
       if (data.otp === value.otp) {
-        navigate('/forgotpassword',{state:{ email:data.envelope.to[0]}})
+        navigate("/forgotpassword", { state: { email: data.envelope.to[0] } });
       } else {
         console.log("error");
       }
@@ -43,7 +43,7 @@ const Otp = () => {
           </Form>
           <ToastContainer />
         </div>
-        </div>
+      </div>
     </>
   );
 };

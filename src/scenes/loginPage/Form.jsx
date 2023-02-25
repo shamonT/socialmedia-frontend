@@ -71,7 +71,7 @@ const Form = () => {
     }
     formData.append("picturePath", values.picture.name);
     console.log(formData, "detailssssss");
-    // 
+    //
     //   const savedUser = await savedUserResponse.json();
     //   onSubmitProps.resetForm();
 
@@ -99,16 +99,16 @@ const Form = () => {
       }
     }
   };
-                
+
   const login = async (values, onSubmitProps) => {
     //
-    const loggedInResponse=await userLogin(values,{
+    const loggedInResponse = await userLogin(values, {
       headers: { "Content-Type": "application/json" },
-    })
-   
-    console.log(loggedInResponse,'loggedInResponse');
-    const loggedIn = await loggedInResponse.data
-    console.log(loggedIn.token,'loggedInloggedIn')
+    });
+
+    console.log(loggedInResponse, "loggedInResponse");
+    const loggedIn = await loggedInResponse.data;
+    console.log(loggedIn.token, "loggedInloggedIn");
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
@@ -118,7 +118,7 @@ const Form = () => {
         })
       );
       navigate("/home");
-    }else{
+    } else {
       toast.error("account  not found");
     }
   };
@@ -310,8 +310,15 @@ const Form = () => {
                       ? "Don't have an account? Sign Up here."
                       : "Already have an account? Login here."}
                   </Typography>
-                  <Typography onclick={()=>{}}>
-                    {isLogin?<p style={{color:"blue",fontWeight:"bold"}}>Forgot your password<NavLink to="/password-reset">:click here</NavLink></p>:""}
+                  <Typography onclick={() => {}}>
+                    {isLogin ? (
+                      <p style={{ color: "blue", fontWeight: "bold" }}>
+                        Forgot your password
+                        <NavLink to="/password-reset">:click here</NavLink>
+                      </p>
+                    ) : (
+                      ""
+                    )}
                   </Typography>
                 </Box>
               </form>

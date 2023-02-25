@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import AdminPage from "scenes/adminPage";
 import HomePage from "scenes/homePage";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 import LoginPage from "scenes/loginPage";
 import ProfilePage from "scenes/profilePage";
 import { useMemo } from "react";
@@ -35,20 +35,22 @@ function App() {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector((state) => state.auth.token));
   const iisAuth = Boolean(useSelector((state) => state.adminAuth.admin));
-  console.log(iisAuth,'bhbhbhbhbbb');
+  console.log(iisAuth, "bhbhbhbhbbb");
   return (
     <div className="App">
-      
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route path="/" element={isAuth===false?<LoginPage />:<HomePage />} />
+            <Route
+              path="/"
+              element={isAuth === false ? <LoginPage /> : <HomePage />}
+            />
             <Route path="/otp-page" element={<OtpFormm />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/Otp" element={<Otp />} />
-            {/* <Route path="/home" element={<HomePage />} /> */}
+           
             <Route
               path="/home"
               element={isAuth ? <HomePage /> : <Navigate to="/" />}
@@ -57,34 +59,34 @@ function App() {
               path="/profile/:userId"
               element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
             />
-               {/* <Route path='/admin/dashboard' element={<Dashboard/>}/> */}
-               {/* <Route path='/register' element={<Register/>}/> */}
-               <Route path='/admin' element={<Admin/>}/>
-               <Route
+           
+            <Route path="/admin" element={<Admin />} />
+            <Route
               path="/admin/dashboard"
               element={iisAuth ? <Dashboard /> : <Navigate to="/admin" />}
             />
             <Route
               path="/admin/user-list"
-              element={iisAuth ? <Userlists/> : <Navigate to="/admin" />}
+              element={iisAuth ? <Userlists /> : <Navigate to="/admin" />}
             />
-               {/* <Route path='/admin/user-list' element={<Userlists/>}/>    */}
-               <Route
+            {/* <Route path='/admin/user-list' element={<Userlists/>}/>    */}
+            <Route
               path="/admin/report-list"
-              element={iisAuth ? <UserreporterList/>: <Navigate to="/admin" />}
+              element={
+                iisAuth ? <UserreporterList /> : <Navigate to="/admin" />
+              }
             />
-               {/* <Route path='/admin/report-list' element={<UserreporterList/>}/>    */}
-               <Route
+            {/* <Route path='/admin/report-list' element={<UserreporterList/>}/>    */}
+            <Route
               path="/chat"
-              element={isAuth ? <Chat/> : <Navigate to="/" />}
-             
-            />   
-               <Route path="/reset-password" element= {<ResetPass />} />
-            <Route path='/report-post' element={<Report/>}/>     
+              element={isAuth ? <Chat /> : <Navigate to="/" />}
+            />
+            <Route path="/reset-password" element={<ResetPass />} />
+            <Route path="/report-post" element={<Report />} />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

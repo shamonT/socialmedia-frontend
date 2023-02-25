@@ -11,20 +11,20 @@ const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.auth.token);
-  let {friends} = useSelector((state) => state.auth.user);
+  let { friends } = useSelector((state) => state.auth.user);
   // friends = [friends]
 
   const getFriends = async () => {
-
-    const response = await getFriendList(userId, { headers: { Authorization: `Bearer ${token}` }, });
-    console.log(response.data, 'friendList');
+    const response = await getFriendList(userId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response.data, "friendList");
     if (response.data) {
-
-        dispatch(setFriends({ friends: response.data }));
-    }else{
+      dispatch(setFriends({ friends: response.data }));
+    } else {
       toast.error("  not found");
     }
-};
+  };
 
   useEffect(() => {
     getFriends();
@@ -41,21 +41,21 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends[0] ?
-        <>
-         {friends?.map((friend) => (
-          <Friend
-            key={friend._id}
-            friendId={friend._id}
-            name={`${friend.firstName} ${friend.lastName}`}
-            subtitle={friend.occupation}
-            userPicturePath={friend.picturePath}
-          />
-        ))}
-        </>
-        :"Add friends"
-        }
-       
+        {friends[0] ? (
+          <>
+            {friends?.map((friend) => (
+              <Friend
+                key={friend._id}
+                friendId={friend._id}
+                name={`${friend.firstName} ${friend.lastName}`}
+                subtitle={friend.occupation}
+                userPicturePath={friend.picturePath}
+              />
+            ))}
+          </>
+        ) : (
+          "Add friends"
+        )}
       </Box>
     </WidgetWrapper>
   );

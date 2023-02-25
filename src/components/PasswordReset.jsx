@@ -19,13 +19,16 @@ const PasswordReset = () => {
     //     "content-type": "application/json",
     //   },
     // });
-    const res = await fetch(`${process.env.REACT_APP_API_AUTH}/users/reset-password`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_API_AUTH}/users/reset-password`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
     console.log(res, "fdfsfdsdfsds");
     const data = await res.json();
     console.log(data, "Gggg");
@@ -72,7 +75,7 @@ const PasswordReset = () => {
 
           {/* <ForgotPassword email={email}/>  */}
         </div>
-        </div>
+      </div>
     </>
   );
 };

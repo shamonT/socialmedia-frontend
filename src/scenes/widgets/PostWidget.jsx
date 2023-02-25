@@ -311,12 +311,14 @@ const PostWidget = ({
           <Divider />
         </Box>
       )}
-      <EditPost opened={opened}
+      <EditPost
+        opened={opened}
         handleClosed={handleClosed}
         postId={postId}
         description={description}
         picturePath={picturePath}
-        handleClose={handleClose}/> 
+        handleClose={handleClose}
+      />
     </WidgetWrapper>
   );
 };

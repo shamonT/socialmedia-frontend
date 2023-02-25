@@ -19,7 +19,6 @@ const OtpFormm = ({
           setOtpField(false);
           setRegButton(true);
           setPageType("login");
-         
         }
       } else {
         toast.error("Incorrect otp");

@@ -15,7 +15,6 @@ import {
 import {
   Search,
   Message,
- 
   Notifications,
   Help,
   Menu,
@@ -61,8 +60,8 @@ const Navbar = () => {
 
   const handleSearch = () => {
     userSearch(search)
-    // axios
-    //   .get("http://localhost:3001/users/search/user/" + search)
+      // axios
+      //   .get("http://localhost:3001/users/search/user/" + search)
       .then((result) => {
         console.log(result, "results");
         setSearchResult(result.data.result);
@@ -109,17 +108,21 @@ const Navbar = () => {
             <div className="c-modal">
               <div className="boader">
                 <div className="text">
-                  <h5>Search Result</h5> 
-                  <button onClick={()=> setShow(false) }>X</button>
+                  <h5>Search Result</h5>
+                  <button onClick={() => setShow(false)}>X</button>
                 </div>
                 <div className="content">
-                  {searchResult.map((friend)=>{
-                    console.log(friend,'hhhis ahsdf');
-                  return  <Friend  key={friend._id}
-                  friendId={friend._id}
-                  name={`${friend.firstName} ${friend.lastName}`}
-                  subtitle={friend.occupation}
-                  userPicturePath={friend.picturePath} />
+                  {searchResult.map((friend) => {
+                    console.log(friend, "hhhis ahsdf");
+                    return (
+                      <Friend
+                        key={friend._id}
+                        friendId={friend._id}
+                        name={`${friend.firstName} ${friend.lastName}`}
+                        subtitle={friend.occupation}
+                        userPicturePath={friend.picturePath}
+                      />
+                    );
                   })}
                 </div>
               </div>
@@ -131,7 +134,7 @@ const Navbar = () => {
       {/* DESKTOP NAV */}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-           <IconButton onClick={() => dispatch(setMode())}>
+          <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (

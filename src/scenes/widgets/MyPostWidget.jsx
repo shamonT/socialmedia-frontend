@@ -35,8 +35,8 @@ const MyPostWidget = ({ picturePath }) => {
   const [post, setPost] = useState("");
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.auth.user);
-  const {token} = useSelector((state) => state.auth);
-  
+  const { token } = useSelector((state) => state.auth);
+
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;
   const medium = palette.neutral.medium;
@@ -49,23 +49,21 @@ const MyPostWidget = ({ picturePath }) => {
       formData.append("picture", image);
       formData.append("picturePath", image.name);
     }
-console.log(token,"bbbbbb");
-const response = await PostData(formData, { headers: { Authorization: `Bearer ${token}` }, })
-console.log(response.data, 'user post chytha dataa');
+    console.log(token, "bbbbbb");
+    const response = await PostData(formData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response.data, "user post chytha dataa");
 
-if (response.data) {
-    const posts = response.data
-    dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
-    
-
-}else{
-  toast.error("oops! didnt support the format");
-}
-
-
-}
+    if (response.data) {
+      const posts = response.data;
+      dispatch(setPosts({ posts }));
+      setImage(null);
+      setPost("");
+    } else {
+      toast.error("oops! didnt support the format");
+    }
+  };
 
   return (
     <WidgetWrapper>

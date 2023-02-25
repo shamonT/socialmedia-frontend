@@ -13,12 +13,10 @@ const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id, picturePath } = useSelector((state) => state.auth.user);
 
-  
-
   return (
-    <Box >
+    <Box>
       <Box className="navbar">
-      <Navbar />
+        <Navbar />
       </Box>
       <Box
         width="100%"
@@ -29,8 +27,8 @@ const HomePage = () => {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-        <Box className="userwidget">
-          <UserWidget userId={_id} picturePath={picturePath} />
+          <Box className="userwidget">
+            <UserWidget userId={_id} picturePath={picturePath} />
           </Box>
         </Box>
         <Box
@@ -38,9 +36,7 @@ const HomePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <MyPostWidget picturePath={picturePath} />
-          <PostsWidget
-           userId={_id}
-            />
+          <PostsWidget userId={_id} />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">

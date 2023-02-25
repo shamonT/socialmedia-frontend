@@ -1,6 +1,5 @@
 // import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import {
-
   Modal,
   Box,
   FormControl,
@@ -8,7 +7,6 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-
 } from "@mui/material";
 import { report } from "api/AuthRequest";
 import axios from "axios";
@@ -16,7 +14,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
 
 const style = {
   position: "absolute",
@@ -35,32 +32,32 @@ const Report = ({ reportModal, setReportModal, postId }) => {
     setReportModal(false);
   };
   // const posts = useSelector((state) => state.auth.posts);
-  const reporterId  = useSelector((state) => state.auth.user);
-  
-  const Submit=async (e,postId) => {
-    e.preventDefault()
-    const obj={
+  const reporterId = useSelector((state) => state.auth.user);
+
+  const Submit = async (e, postId) => {
+    e.preventDefault();
+    const obj = {
       reason,
-      reporterId:reporterId,
-    }
-    try{
-      const response=await report(postId,obj)
+      reporterId: reporterId,
+    };
+    try {
+      const response = await report(postId, obj);
       // const response= await axios.post(`http://localhost:3001/posts/${postId}/report-post`,obj)
-      console.log(response,'response');
-      
-      if(response.status === 201){
+      console.log(response, "response");
+
+      if (response.status === 201) {
         toast.success("Report Submitted");
         setReportModal(false);
-        console.log(response,'response');
-      }else{
-        toast.error(response.data.message)
-        console.log(response,'erro');
+        console.log(response, "response");
+      } else {
+        toast.error(response.data.message);
+        console.log(response, "erro");
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
-  const[reason,setReason]=useState(null)
+  };
+  const [reason, setReason] = useState(null);
   return (
     <div>
       <Modal
@@ -70,17 +67,34 @@ const Report = ({ reportModal, setReportModal, postId }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form onSubmit={(e) =>  (Submit(e,postId)) }>
-        <FormControl component="fieldset">
-  <FormLabel component="legend">Report post</FormLabel>
-  <RadioGroup aria-label="reason" name="reason">
-    <FormControlLabel value="spam" control={<Radio />} onChange={(e) => setReason('spam')}  label="spam" />
-    <FormControlLabel value="inappropriate" control={<Radio />}  onChange={(e) => setReason('Inappropriate content')} label="Inappropriate content" />
-    <FormControlLabel value="other" control={<Radio />}   onChange={(e) => setReason('Other')} label="Other" />
-  </RadioGroup>
-  <button type="submit" variant="warning" >Submit</button>
-</FormControl>
-</form>
+          <form onSubmit={(e) => Submit(e, postId)}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Report post</FormLabel>
+              <RadioGroup aria-label="reason" name="reason">
+                <FormControlLabel
+                  value="spam"
+                  control={<Radio />}
+                  onChange={(e) => setReason("spam")}
+                  label="spam"
+                />
+                <FormControlLabel
+                  value="inappropriate"
+                  control={<Radio />}
+                  onChange={(e) => setReason("Inappropriate content")}
+                  label="Inappropriate content"
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  onChange={(e) => setReason("Other")}
+                  label="Other"
+                />
+              </RadioGroup>
+              <button type="submit" variant="warning">
+                Submit
+              </button>
+            </FormControl>
+          </form>
         </Box>
       </Modal>
       {/* <FormControl>

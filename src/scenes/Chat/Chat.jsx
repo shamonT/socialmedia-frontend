@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import ChatBox from "components/ChatBox/ChatBox";
 import Navbar from "scenes/navbar";
 import ConversationWidget from "scenes/widgets/ConversationWidget";
-import "./Chat.css" ;
-import { io } from "socket.io-client"
+import "./Chat.css";
+import { io } from "socket.io-client";
 import { userChats } from "api/AuthRequest";
 const Chat = () => {
-    const user = useSelector((state) => state.auth.user); 
+  const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
 
   const socket = useRef();
@@ -47,7 +47,9 @@ const Chat = () => {
   useEffect(() => {
     const getChats = async () => {
       try {
-        const { data } = await userChats(user._id,{ headers: { Authorization: `Bearer ${token}` }});
+        const { data } = await userChats(user._id, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setChats(data);
       } catch (error) {
         console.log(error);
@@ -64,10 +66,10 @@ const Chat = () => {
 
   return (
     <Box>
-      <Box  className="navbar">
-      <Navbar />
+      <Box className="navbar">
+        <Navbar />
       </Box>
-      
+
       <Box>
         <div className="Chat">
           {/* Left Side */}
@@ -81,19 +83,20 @@ const Chat = () => {
                       setCurrentChat(chat);
                     }}
                   >
-                    <ConversationWidget data={chat} currentUserId={user._id}   online={checkOnlineStatus(chat)}/>
+                    <ConversationWidget
+                      data={chat}
+                      currentUserId={user._id}
+                      online={checkOnlineStatus(chat)}
+                    />
                   </div>
                 ))}
               </div>
             </div>
           </div>
           <div className="Right-side-chat">
-            <div style={{ width: "20rem", alignSelf: "flex-end" }}>
-              
-              
-            </div>
+            <div style={{ width: "20rem", alignSelf: "flex-end" }}></div>
             {/* Chat Body */}
-            
+
             <ChatBox
               chat={currentChat}
               currentUser={user._id}
@@ -108,5 +111,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
-

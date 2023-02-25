@@ -2,21 +2,19 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./ChatBox.css";
-import { format } from "timeago.js"; 
+import { format } from "timeago.js";
 
 // import InputEmoji from "react-input-emoji";
 import axios from "axios";
 import { addMessage, getMessages, getUserProfile } from "api/AuthRequest";
 
-const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
+const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const token = useSelector((state) => state.auth.token);
-  
 
   const handleChange = (e) => {
-    
     setNewMessage(e.target.value);
   };
 
@@ -62,12 +60,9 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
     if (chat !== null) fetchMessages();
   }, [chat]);
 
-
-  
-
   const handleSend = async (e) => {
     e.preventDefault();
-    
+
     const message = {
       senderId: currentUser,
       text: newMessage,
@@ -75,16 +70,14 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
     };
     console.log(message, "measage");
     //Send message to database
-    if(message.text!==""){
-
+    if (message.text !== "") {
       try {
-     
         const { data } = await addMessage(message, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (data) {
           console.log(data, "new chat111111111111");
-  
+
           setMessages([...messages, data]);
           console.log(messages, "kitiianam");
           setNewMessage("");
@@ -95,7 +88,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
         console.log(error, "error ividee");
       }
     }
-   
 
     //Send Message to socket server
     const receiverId = chat.members.find((id) => id !== currentUser);
@@ -111,12 +103,12 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
     }
   }, [receivedMessage]);
 
-    // Always scroll to last Message
-    // useEffect(() => {
-    //   scroll.current?scroll.current.scrollIntoView({ behavior: "smooth" }): "";
-    // }, [messages]);
+  // Always scroll to last Message
+  // useEffect(() => {
+  //   scroll.current?scroll.current.scrollIntoView({ behavior: "smooth" }): "";
+  // }, [messages]);
 
-    const scroll = useRef();
+  const scroll = useRef();
   return (
     <>
       <div className="ChatBox-container">
@@ -146,7 +138,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                         {userData ? userData.firstName : ""}{" "}
                         {userData ? userData.lastName : ""}
                       </span>
-                      <br/>
+                      <br />
                       <span>Online</span>
                     </div>
                   </div>
@@ -166,7 +158,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                         : "message"
                     }
                   >
-
                     <span>{message.text}</span>
                     <span>{format(message.createdAt)}</span>
                   </div>
@@ -183,7 +174,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
                 placeholder="Message"
                 value={newMessage}
                 onChange={handleChange}
-             
               />
               <div className="send-button button" onClick={handleSend}>
                 Send
@@ -201,4 +191,4 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage  }) => {
   );
 };
 
-export default ChatBox; 
+export default ChatBox;

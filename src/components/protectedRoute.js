@@ -10,5 +10,3 @@ function AdminProtectedRoute(props) {
 }
 
 export default AdminProtectedRoute;
-
-

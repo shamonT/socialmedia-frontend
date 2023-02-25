@@ -5,9 +5,19 @@ import {
   WorkOutlineOutlined,
   DeleteOutlined,
 } from "@mui/icons-material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CreateIcon from '@mui/icons-material/Create';
-import { Box, Typography, Divider, useTheme, ButtonBase, Modal, IconButton, Alert, LinearProgress } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CreateIcon from "@mui/icons-material/Create";
+import {
+  Box,
+  Typography,
+  Divider,
+  useTheme,
+  ButtonBase,
+  Modal,
+  IconButton,
+  Alert,
+  LinearProgress,
+} from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -17,8 +27,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setLogin } from "state";
 import { Button, Form, Input, Upload } from "antd";
-import TextsmsIcon from '@mui/icons-material/Textsms';
-import { createUserChat, editProfile, editProflePic, getUserProfile } from "api/AuthRequest";
+import TextsmsIcon from "@mui/icons-material/Textsms";
+import {
+  createUserChat,
+  editProfile,
+  editProflePic,
+  getUserProfile,
+} from "api/AuthRequest";
 import Dropzone from "react-dropzone";
 import EditProfile from "components/EditProfile";
 import { toast } from "react-toastify";
@@ -35,93 +50,79 @@ const UserWidget = ({ userId, picturePath }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [loader, setLoader] = useState(false)
-  const [isImage, setIsImage] = useState(false)
+  const [loader, setLoader] = useState(false);
+  const [isImage, setIsImage] = useState(false);
 
   const [openPic, setOpenPic] = useState(false);
   const [image, setImage] = useState(null);
   useEffect(() => {
     if (userId === currUserId._id) {
       console.log(currUserId);
-      setIsCurrUser(true)
-
+      setIsCurrUser(true);
     } else {
-      setIsCurrUser(false)
-
+      setIsCurrUser(false);
     }
-  }, [isCurrUser])
+  }, [isCurrUser]);
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
   const dispatch = useDispatch();
 
   const handleProfilePicture = async () => {
-   
     const formData = new FormData();
-    console.log(formData,'formDataformData');
-    formData.append("userId", currUserId._id)
+    console.log(formData, "formDataformData");
+    formData.append("userId", currUserId._id);
     if (image) {
       formData.append("picture", image);
       formData.append("picturePath", image.name);
-
     } else {
-      setIsImage(true)
+      setIsImage(true);
       setTimeout(() => {
-        setIsImage(false)
+        setIsImage(false);
       }, 3000);
     }
 
     //posting post
-    const response = await editProflePic(currUserId._id, formData)
-    console.log(response,'responseresponse');
-    setLoader(true)
+    const response = await editProflePic(currUserId._id, formData);
+    console.log(response, "responseresponse");
+    setLoader(true);
 
     if (response.data.success) {
-
-      setImage(null)
+      setImage(null);
 
       dispatch(
         setLogin({
           user: response.data.user,
           token: response.data.token,
-        }),
-
+        })
       );
 
       setTimeout(() => {
-        setLoader(false)
+        setLoader(false);
       }, 3000);
-
-
-    }else{
+    } else {
       toast.error("image format  not supported/reduce resolution");
     }
-
-
-  }
-
-
-
+  };
 
   //edit profile
   const onFinish = async (values) => {
     try {
-      console.log('working');
-      console.log(values,'onsubmitting');
-  const response= await editProfile(currUserId,values)
-      
+      console.log("working");
+      console.log(values, "onsubmitting");
+      const response = await editProfile(currUserId, values);
 
       if (response.data.success) {
-        console.log(response.data.user, 'nokkate');
+        console.log(response.data.user, "nokkate");
         dispatch(
           setLogin({
             user: response.data.user,
@@ -129,29 +130,25 @@ const UserWidget = ({ userId, picturePath }) => {
           }),
 
           handleClose()
-
         );
-
-
       } else {
-        console.log('vannilaa');
-
+        console.log("vannilaa");
       }
     } catch (error) {
       console.log(error);
     }
-
-  }
+  };
   const getUser = async () => {
-
-    const response = await getUserProfile(userId, { headers: { Authorization: `Bearer ${token}` } })
-    console.log(response.data, 'its working');
+    const response = await getUserProfile(userId, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response.data, "its working");
 
     if (response.data) {
-      const data = response.data
+      const data = response.data;
       setUser(data);
     }
-  }
+  };
 
   useEffect(() => {
     console.log(userId);
@@ -162,21 +159,19 @@ const UserWidget = ({ userId, picturePath }) => {
     return null;
   }
 
-   //Create Chat
-   const createChat = async () => {
-    const senderId = currUserId._id
-    const receiverId = userId
+  //Create Chat
+  const createChat = async () => {
+    const senderId = currUserId._id;
+    const receiverId = userId;
 
-    const response = await createUserChat({ senderId, receiverId })
+    const response = await createUserChat({ senderId, receiverId });
 
-    console.log(response.data, 'packkk');
+    console.log(response.data, "packkk");
 
     if (response.data) {
-      navigate("../chat")
+      navigate("../chat");
     }
-
-
-  }
+  };
   const {
     firstName,
     lastName,
@@ -217,8 +212,7 @@ const UserWidget = ({ userId, picturePath }) => {
         {/* <ManageAccountsOutlined ><Link href="/" underline="none">
   {'underline="none"'}
 </Link></ManageAccountsOutlined> */}
-{/* <Link href="/">Link</Link> */}
-
+        {/* <Link href="/">Link</Link> */}
       </FlexBetween>
 
       <Divider />
@@ -229,33 +223,48 @@ const UserWidget = ({ userId, picturePath }) => {
           <LocationOnOutlined fontSize="large" sx={{ color: main }} />
           <Typography color={medium}>{location}</Typography>
         </Box> */}
-       <Box  onClick={() => navigate("/home")}></Box>
+        <Box onClick={() => navigate("/home")}></Box>
         <Box display="flex" alignItems="center" gap="1rem">
           <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
           <Typography color={medium}>{occupation}</Typography>
         </Box>
-        {isCurrUser ?
-          (
-            <Box>
-              <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                <CreateIcon fontSize="large" sx={{ color: main }} />
-                <ButtonBase onClick={handleOpen} > <Typography color={medium}>Edit Profile</Typography></ButtonBase>
-              </Box>
-              <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
-                <AccountCircleIcon fontSize="large" sx={{ color: main }} />
-                <ButtonBase onClick={() => { setOpenPic(!openPic) }} > <Typography color={medium}>Edit Profile Picture</Typography></ButtonBase>
-
-              </Box>
+        {isCurrUser ? (
+          <Box>
+            <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+              <CreateIcon fontSize="large" sx={{ color: main }} />
+              <ButtonBase onClick={handleOpen}>
+                {" "}
+                <Typography color={medium}>Edit Profile</Typography>
+              </ButtonBase>
             </Box>
-          )
-          : <Box display="flex" alignItems="center" gap="1rem">
-            <TextsmsIcon fontSize="large" sx={{ cursor: "pointer" }}
-              onClick={() => { createChat() }} >Message</TextsmsIcon>
+            <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+              <AccountCircleIcon fontSize="large" sx={{ color: main }} />
+              <ButtonBase
+                onClick={() => {
+                  setOpenPic(!openPic);
+                }}
+              >
+                {" "}
+                <Typography color={medium}>Edit Profile Picture</Typography>
+              </ButtonBase>
+            </Box>
+          </Box>
+        ) : (
+          <Box display="flex" alignItems="center" gap="1rem">
+            <TextsmsIcon
+              fontSize="large"
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                createChat();
+              }}
+            >
+              Message
+            </TextsmsIcon>
 
             <Typography color={medium}>Message</Typography>
-          </Box>}
+          </Box>
+        )}
       </Box>
-
 
       <Divider />
 
@@ -282,7 +291,7 @@ const UserWidget = ({ userId, picturePath }) => {
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
           Social Profiles
         </Typography>
-{/* 
+        {/* 
         <FlexBetween gap="1rem" mb="0.5rem">
           <FlexBetween gap="1rem">
             <img src="../assets/twitter.png" alt="twitter" />
@@ -306,13 +315,13 @@ const UserWidget = ({ userId, picturePath }) => {
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-         
+
           {/* <link  ></link> */}
         </FlexBetween>
       </Box>
 
-       {/* Edit Your Profileeeee */}
-       <Modal
+      {/* Edit Your Profileeeee */}
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -323,38 +332,49 @@ const UserWidget = ({ userId, picturePath }) => {
             Edit Profile
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-
-            <Form layout="vertical" onFinish={onFinish}>
-
-              <Form.Item label="First Name" name="firstName" >
-                <Input placeholder={currUserId.firstName} defaultValue={currUserId.firstName}/>
+            <Form layout="vertical" onFinish={onFinish} >
+              <Form.Item label="First Name" name="firstName"    
+                // rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                <Input
+                  placeholder={currUserId.firstName}
+                  defaultValue={currUserId.firstName}
+             
+                />
               </Form.Item>
 
               <Form.Item label="Last Name" name="lastName">
-                <Input placeholder={currUserId.lastName} defaultValue={currUserId.lastName} />
+                <Input
+                  placeholder={currUserId.lastName}
+                  defaultValue={currUserId.lastName}
+                />
               </Form.Item>
               <Form.Item label="Location" name="location">
-                <Input placeholder={currUserId.location} defaultValue={currUserId.location} />
+                <Input
+                  placeholder={currUserId.location}
+                  defaultValue={currUserId.location}
+                />
               </Form.Item>
-
-              
 
               <Form.Item label="Occupation" name="occupation">
-                <Input placeholder={currUserId.occupation} defaultValue={currUserId.occupation}/>
+                <Input
+                  placeholder={currUserId.occupation}
+                  defaultValue={currUserId.occupation}
+                />
               </Form.Item>
 
-              <Form.Item label="Occupation" name="_id" hidden={true} initialValue={currUserId._id} defaultValue={currUserId._id}>
+              <Form.Item
+                label="Occupation"
+                name="_id"
+                hidden={true}
+                initialValue={currUserId._id}
+                defaultValue={currUserId._id}
+              >
                 <Input />
-
               </Form.Item>
 
               <div className="d-flex flex-column">
-                <Button
-
-                  htmlType="submit"
-                >
-                  Submit
-                </Button>
+                <Button htmlType="submit">Submit</Button>
               </div>
             </Form>
           </Typography>
@@ -405,7 +425,6 @@ const UserWidget = ({ userId, picturePath }) => {
                 </FlexBetween>
               )}
             </Dropzone>
-
           </Box>
           <Button
             onClick={handleProfilePicture}
@@ -418,13 +437,11 @@ const UserWidget = ({ userId, picturePath }) => {
             Set Profile Picture
           </Button>
         </WidgetWrapper>
-      ) : ""}
-      {isImage ? (
-        <Alert severity="error">Please Select an Image</Alert>
-      ) : ""}
-      {loader ? (<LinearProgress />) : null}
-
-
+      ) : (
+        ""
+      )}
+      {isImage ? <Alert severity="error">Please Select an Image</Alert> : ""}
+      {loader ? <LinearProgress /> : null}
     </WidgetWrapper>
   );
 };
